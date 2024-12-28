@@ -41,3 +41,14 @@ export const isAuthenticated = catchAsync(async (req, res, next) => {
     throw error;
   }
 });
+
+// Middleware to check if the user is an admin
+export const isAdmin = catchAsync(async (req, res, next) => {
+  // Check if the user is an admin
+  if (!req.user?.role || req.user.role !== "admin") {
+    throw new AppError("You do not have permission to access this route", 403);
+  }
+
+  // Proceed to the next middleware or route handler
+  next();
+});

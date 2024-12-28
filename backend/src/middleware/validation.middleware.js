@@ -1,5 +1,6 @@
 import { body, validationResult } from "express-validator";
 import { AppError } from "../ utils/appError.js";
+import mongoose from "mongoose";
 
 // Utility function to handle validation
 export const validate = (validations) => {

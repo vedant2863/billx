@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+import mongoose,{ Schema } from "mongoose";
 
 // Constants for status and currencies
 const INVOICE_STATUS = ["paid", "unpaid", "partially_paid"];
@@ -82,7 +81,7 @@ const invoiceSchema = new Schema(
 );
 
 // Virtual field to calculate the totalAmount dynamically based on items
-invoiceSchema.virtual('totalAmount').get(function() {
+invoiceSchema.virtual('calculatedTotalAmount').get(function() {
   const itemsTotal = this.items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
   const taxAmount = (this.taxes / 100) * itemsTotal;
   const discountAmount = (this.discounts / 100) * itemsTotal;
