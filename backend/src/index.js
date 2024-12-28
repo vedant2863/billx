@@ -7,6 +7,14 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// 404 Handler
+app.use((req, res) => {
+  res.status(404).json({
+    status: "error",
+    message: "Route not found",
+  });
+});
+
 // Global Error Handler.
 app.use((err, req, res, next) => {
   console.error(err);
