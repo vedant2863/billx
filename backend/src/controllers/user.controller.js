@@ -22,7 +22,6 @@ export const userRegister = catchAsync(async (req, res) => {
   await user.save();
 
   generateToken(res, user._id, "Account created successfully");
-
 });
 
 export const userLogin = catchAsync(async (req, res) => {
@@ -46,30 +45,52 @@ export const logOut = catchAsync(async (_, res) => {
 });
 
 export const getCurrentUserProfile = catchAsync(async (req, res) => {
-    // Use req.id instead of req.user._id since we are setting req.id in the isAuthenticated middleware
-    const user = await User.findById(req.id); // Access the user via req.id
-  
-    if (!user) {
-      throw new AppError("User not found", 404);
-    }
-  
-    res.status(200).json({
-      success: true,
-      data: user, // Send the user data in the response
-    });
+  // Use req.id instead of req.user._id since we are setting req.id in the isAuthenticated middleware
+  const user = await User.findById(req.id); // Access the user via req.id
+
+  if (!user) {
+    throw new AppError("User not found", 404);
+  }
+
+  res.status(200).json({
+    success: true,
+    data: user, // Send the user data in the response
+  });
+});
+
+export const updateUserProfile = catchAsync(async (req, res) => {
+  const { name, email } = req.body;
+  if (!name || !email) throw new AppError("Missing required fields", 400);
+
+  // Update the user's name, email
+  const updateUserData = await User.findByIdAndUpdate(req.id, {
+    name,
+    email: email?.toLowerCase(),
   });
 
-  export const updateUserProfile = catchAsync(async (req, res) => {
-    const { name, email } = req.body;
-    if (!name || !email)
-      throw new AppError("Missing required fields", 400);
-
-    // Update the user's name, email
- const updateUserData=   await User.findByIdAndUpdate(req.id, { name, email: email?.toLowerCase() });
-
-    res.status(200).json({
-      success: true,
-      message: "User profile updated successfully",
-      data: updateUserData,
-    });
+  res.status(200).json({
+    success: true,
+    message: "User profile updated successfully",
+    data: updateUserData,
   });
+});
+
+export const updateUserPassword = catchAsync(async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  if (!currentPassword || !newPassword)
+    throw new AppError("Missing required fields", 400);
+
+  // Check if the current password is correct
+  const user = await User.findById(req.id).select("+password");
+  if (!(await user.comparePassword(currentPassword))) {
+    throw new AppError("Invalid current password", 401);
+  }
+  // Update password
+  user.password = newPassword;
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Password changed successfully",
+  });
+});

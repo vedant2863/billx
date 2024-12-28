@@ -2,11 +2,13 @@ import { Router } from "express";
 import {
   getCurrentUserProfile,
   logOut,
+  updateUserPassword,
   updateUserProfile,
   userLogin,
   userRegister,
 } from "../controllers/user.controller.js";
 import {
+    validatePasswordChange,
   validateSignin,
   validateSignup,
 } from "../middleware/validation.middleware.js";
@@ -27,5 +29,8 @@ userRouter.get("/me", isAuthenticated, getCurrentUserProfile);
 
 // PATCH /api/v1/users/update-profile: Update the logged-in user's profile
 userRouter.patch("/update-profile", isAuthenticated, updateUserProfile);
+
+//PATCH /api/v1/users/update-password: Update the logged-in user's password
+userRouter.patch("/update-password", isAuthenticated,updateUserPassword);
 
 export default userRouter;
