@@ -7,6 +7,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Logging Middleware
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
 // 404 Handler
 app.use((req, res) => {
   res.status(404).json({
