@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllUsers, getUser } from "../controllers/admin.controller.js";
+import { deleteUser, getAllUsers, getUser } from "../controllers/admin.controller.js";
 
 const adminRouter = Router();
 
@@ -8,5 +8,8 @@ adminRouter.get("/all-users", getAllUsers);
 
 // GET /api/v1/users/:id: Get details of a specific user
 adminRouter.get("/:id", getUser);
+
+// DELETE /api/v1/users/:id: Delete a user
+adminRouter.delete("/:id", deleteUser);
 
 export default adminRouter;
