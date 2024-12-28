@@ -58,3 +58,18 @@ export const getCurrentUserProfile = catchAsync(async (req, res) => {
       data: user, // Send the user data in the response
     });
   });
+
+  export const updateUserProfile = catchAsync(async (req, res) => {
+    const { name, email } = req.body;
+    if (!name || !email)
+      throw new AppError("Missing required fields", 400);
+
+    // Update the user's name, email
+ const updateUserData=   await User.findByIdAndUpdate(req.id, { name, email: email?.toLowerCase() });
+
+    res.status(200).json({
+      success: true,
+      message: "User profile updated successfully",
+      data: updateUserData,
+    });
+  });

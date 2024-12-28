@@ -5,11 +5,11 @@ POST /api/v1/users/logout: Logout the current user.
 GET /api/v1/users/me: Get the logged-in user's profile. 
 PATCH /api/v1/users/update-profile: Update the logged-in user's profile. 
 PATCH /api/v1/users/update-password: Change the user's password. 
+
+Admin Dashboard Routes 
 GET /api/v1/users: Get a list of all users (Admin only). 
 GET /api/v1/users/:id: Get details of a specific user (Admin only). 
 DELETE /api/v1/users/:id: Delete a user (Admin only).
-
-Admin Dashboard Routes 
 GET /api/v1/admin/overview: Get an overview of application stats (e.g., users, invoices, payments). GET /api/v1/admin/logs: Get system or activity logs.
 Role-Based Access Control Routes 
 PATCH /api/v1/users/:id/assign-role: Assign roles to a user (Admin only). 

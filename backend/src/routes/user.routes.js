@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   getCurrentUserProfile,
   logOut,
+  updateUserProfile,
   userLogin,
   userRegister,
 } from "../controllers/user.controller.js";
@@ -23,5 +24,8 @@ userRouter.post("/logout", logOut);
 
 // GET /api/v1/users/me: Get the logged-in user's profile.
 userRouter.get("/me", isAuthenticated, getCurrentUserProfile);
+
+// PATCH /api/v1/users/update-profile: Update the logged-in user's profile
+userRouter.patch("/update-profile", isAuthenticated, updateUserProfile);
 
 export default userRouter;
