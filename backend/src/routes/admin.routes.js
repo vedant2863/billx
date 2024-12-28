@@ -18,7 +18,5 @@ adminRouter.get("/:id", isAdmin, getUser);
 // DELETE /api/v1/users/:id: Delete a user
 adminRouter.delete("/:id", isAdmin, deleteUser);
 
-//GET /api/v1/admin/overview: Get an overview of application stats (e.g., users, invoices, payments).
-adminRouter.get("/overview-all", isAdmin, getAdminOverview);
 
 export default adminRouter;
