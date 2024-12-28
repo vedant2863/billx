@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import morgan from "morgan";
 
 //Load env variables
 dotenv.config();
