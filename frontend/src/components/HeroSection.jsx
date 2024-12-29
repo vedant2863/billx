@@ -6,7 +6,7 @@ export default function HeroSection() {
       <div className="container mx-auto">
         {/* Hero Title */}
         <h1 className="text-4xl sm:text-5xl font-bold text-[var(--color-text-light)] mb-4">
-          InvoicePro
+          BillX
         </h1>
         {/* Hero Description */}
         <p className="text-lg sm:text-xl text-[var(--color-text-light)] mb-6">

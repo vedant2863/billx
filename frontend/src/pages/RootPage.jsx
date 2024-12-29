@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import CallToAction from "../components/CallToAction";
 import FeaturesOverview from "../components/FeaturesOverview";
 import Navbar from "../components/Navbar";

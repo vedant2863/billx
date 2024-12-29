@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const navLinks = [
   { name: "Home", to: "/" },
@@ -10,19 +10,19 @@ export default function Navbar() {
   return (
     <nav className="bg-primary py-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center px-4">
-        <NavLink to="/" className="text-white text-2xl font-semibold">
-          InvoicePro
-        </NavLink>
+        <Link to="/" className="text-white text-2xl font-extrabold">
+        BillX
+        </Link>
         <ul className="flex space-x-8">
           {navLinks.map((link) => (
             <li key={link.to}>
-              <NavLink
+              <Link
                 to={link.to}
                 className="text-white hover:text-gray-300 transition"
                 activeClassName="text-gray-300"
               >
                 {link.name}
-              </NavLink>
+              </Link>
             </li>
           ))}
         </ul>

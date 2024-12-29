@@ -1,44 +1,200 @@
-User Management Routes 
-POST /api/v1/users/register: Register a new user. 
-POST /api/v1/users/login: Authenticate and login. 
-POST /api/v1/users/logout: Logout the current user. 
-GET /api/v1/users/me: Get the logged-in user's profile. 
-PATCH /api/v1/users/update-profile: Update the logged-in user's profile. 
-PATCH /api/v1/users/update-password: Change the user's password. 
+# Backend Routes and Their Purpose
 
-Admin Dashboard Routes 
-GET /api/v1/users: Get a list of all users (Admin only). 
-GET /api/v1/users/:id: Get details of a specific user (Admin only). 
-DELETE /api/v1/users/:id: Delete a user (Admin only).
-GET /api/v1/admin/overview: Get an overview of application stats (e.g., users, invoices, payments). GET /api/v1/admin/logs: Get system or activity logs.
-Role-Based Access Control Routes 
-PATCH /api/v1/users/:id/assign-role: Assign roles to a user (Admin only). 
-GET /api/v1/roles: Get a list of all roles. GET /api/v1/roles/:role/users: Get users assigned to a specific role.
+## 1. Authentication and User Management
+### `POST /api/auth/register`
+- **Purpose**: Register a new user.
+- **Actions**:
+  - Accept user details (name, email, password).
+  - Hash the password and save the user in the database.
+  - Return success message or error.
 
-Client/Customer Portal Routes 
-GET /api/v1/clients: Get a list of clients/customers. 
-POST /api/v1/clients: Add a new client. 
-GET /api/v1/clients/:id: Get details of a specific client. PATCH /api/v1/clients/:id: Update client information. 
-DELETE /api/v1/clients/:id: Delete a client.
+### `POST /api/auth/login`
+- **Purpose**: Authenticate a user and provide a token.
+- **Actions**:
+  - Validate email and password.
+  - Generate a JWT token for authorized access.
+  - Return the token and user details.
 
-Invoice Management Routes 
-POST /api/v1/invoices: Create a new invoice. 
-GET /api/v1/invoices: Get a list of all invoices. 
-GET /api/v1/invoices/:id: Get details of a specific invoice. 
-PATCH /api/v1/invoices/:id: Update an invoice. 
-DELETE /api/v1/invoices/:id: Delete an invoice.
-PDF Generation Routes GET /api/v1/invoices/:id/pdf: Generate a PDF of a specific invoice. 
-POST /api/v1/invoices/:id/customize-pdf: Customize a PDF template for an invoice.
-Email Integration Routes 
-POST /api/v1/emails/send-invoice/:id: Send an invoice via email. 
-GET /api/v1/emails/templates: Get predefined email templates. 
-POST /api/v1/emails/templates: Add a new email template. 
-PATCH /api/v1/emails/templates/:id: Update an email template. 
-DELETE /api/v1/emails/templates/:id: Delete an email template.
+### `POST /api/auth/logout`
+- **Purpose**: Log out the user.
+- **Actions**:
+  - Invalidate the user's token on the server.
+  - Return success message.
 
-Payment Options Routes POST /api/v1/payments: Record a manual payment. GET /api/v1/payments: Get a list of all payments. GET /api/v1/payments/:id: Get details of a specific payment. POST /api/v1/payments/:id/online: Process an online payment. GET /api/v1/payments/status/:id: Get the payment status of an invoice.
-Analytics and Reporting Routes GET /api/v1/reports/payments: Get payment reports. GET /api/v1/reports/invoices/outstanding: Get outstanding invoices. GET /api/v1/reports/taxes: Get tax reports. GET /api/v1/reports/download: Download reports in PDF/Excel.
-Security Routes POST /api/v1/auth/enable-2fa: Enable two-factor authentication. POST /api/v1/auth/verify-2fa: Verify two-factor authentication code. POST /api/v1/auth/oauth: OAuth login.
-Localization Routes GET /api/v1/localization/languages: Get available languages. PATCH /api/v1/localization/update: Update localization settings (Admin only).
-Notifications Routes POST /api/v1/notifications/send: Send a notification (Admin only). GET /api/v1/notifications: Get all notifications. PATCH /api/v1/notifications/:id: Mark a notification as read. DELETE /api/v1/notifications/:id: Delete a notification.
-Integration Routes POST /api/v1/integration/sync: Sync data with external systems. GET /api/v1/integration/tools: Get a list of supported accounting tools.
+### `POST /api/auth/forgot-password`
+- **Purpose**: Send password reset instructions.
+- **Actions**:
+  - Accept email.
+  - Generate and send a reset token via email.
+
+### `POST /api/auth/reset-password`
+- **Purpose**: Reset the user’s password.
+- **Actions**:
+  - Verify reset token.
+  - Update the user’s password in the database.
+
+---
+
+## 2. Dashboard
+### `GET /api/dashboard`
+- **Purpose**: Fetch overview statistics for the user.
+- **Actions**:
+  - Return data for:
+    - Total invoices.
+    - Count of paid, unpaid, and overdue invoices.
+    - Recent invoices list.
+
+---
+
+## 3. Invoice Management
+### `GET /api/invoices`
+- **Purpose**: Retrieve all invoices for a user.
+- **Actions**:
+  - Query the database for invoices associated with the logged-in user.
+  - Support filters for status and date range.
+
+### `POST /api/invoices`
+- **Purpose**: Create a new invoice.
+- **Actions**:
+  - Accept invoice details:
+    - Freelancer/client details, services, payment info.
+  - Save the invoice to the database.
+  - Return the created invoice.
+
+### `GET /api/invoices/:id`
+- **Purpose**: Retrieve a specific invoice.
+- **Actions**:
+  - Fetch invoice details by ID.
+  - Verify the invoice belongs to the logged-in user.
+
+### `PUT /api/invoices/:id`
+- **Purpose**: Update an existing invoice.
+- **Actions**:
+  - Accept updated invoice details.
+  - Validate and update the invoice in the database.
+
+### `DELETE /api/invoices/:id`
+- **Purpose**: Delete an invoice.
+- **Actions**:
+  - Remove the invoice by ID from the database.
+
+---
+
+## 4. Client Management
+### `GET /api/clients`
+- **Purpose**: Retrieve all clients for a user.
+- **Actions**:
+  - Query the database for all clients associated with the user.
+  - Support search and filters.
+
+### `POST /api/clients`
+- **Purpose**: Add a new client.
+- **Actions**:
+  - Accept client details (name, company, address, etc.).
+  - Save the client in the database.
+
+### `GET /api/clients/:id`
+- **Purpose**: Retrieve details of a specific client.
+- **Actions**:
+  - Fetch client details by ID.
+  - Include associated invoices.
+
+### `PUT /api/clients/:id`
+- **Purpose**: Update a client’s information.
+- **Actions**:
+  - Accept updated details.
+  - Validate and update the client in the database.
+
+### `DELETE /api/clients/:id`
+- **Purpose**: Delete a client.
+- **Actions**:
+  - Remove the client by ID from the database.
+
+---
+
+## 5. Recurring Invoices
+### `GET /api/recurring-invoices`
+- **Purpose**: Retrieve recurring invoice templates.
+- **Actions**:
+  - Fetch all recurring templates for the user.
+
+### `POST /api/recurring-invoices`
+- **Purpose**: Create a new recurring invoice template.
+- **Actions**:
+  - Accept template details (client, frequency, services, etc.).
+  - Save the template to the database.
+
+### `GET /api/recurring-invoices/:id`
+- **Purpose**: Retrieve a specific recurring invoice template.
+- **Actions**:
+  - Fetch template details by ID.
+
+### `PUT /api/recurring-invoices/:id`
+- **Purpose**: Update a recurring invoice template.
+- **Actions**:
+  - Accept updated template details.
+  - Validate and update the template.
+
+### `DELETE /api/recurring-invoices/:id`
+- **Purpose**: Deactivate a recurring invoice template.
+- **Actions**:
+  - Mark the template as inactive.
+
+---
+
+## 6. Payment Management
+### `GET /api/payments`
+- **Purpose**: Retrieve all payments.
+- **Actions**:
+  - Fetch all payments for the user.
+  - Support filters for date range and methods.
+
+### `POST /api/payments`
+- **Purpose**: Record a payment for an invoice.
+- **Actions**:
+  - Accept payment details (invoice ID, amount, method).
+  - Update invoice status to "Paid" if applicable.
+  - Save payment to the database.
+
+### `GET /api/payments/:id`
+- **Purpose**: Retrieve a specific payment.
+- **Actions**:
+  - Fetch payment details by ID.
+
+### `DELETE /api/payments/:id`
+- **Purpose**: Delete a payment.
+- **Actions**:
+  - Remove the payment and update the associated invoice status.
+
+---
+
+## 7. Settings
+### `GET /api/settings`
+- **Purpose**: Retrieve user settings.
+- **Actions**:
+  - Return branding, preferences, and tax information.
+
+### `PUT /api/settings`
+- **Purpose**: Update user settings.
+- **Actions**:
+  - Accept updated settings and save them in the database.
+
+---
+
+## 8. Additional Features
+### `POST /api/export`
+- **Purpose**: Export invoices as PDF.
+- **Actions**:
+  - Accept invoice IDs for export.
+  - Generate PDF and return download link.
+
+### `POST /api/integrations/time-tracking`
+- **Purpose**: Sync time-tracking data.
+- **Actions**:
+  - Accept time log details.
+  - Auto-generate invoice items based on the data.
+
+### `POST /api/integrations/mobile`
+- **Purpose**: Handle mobile-specific operations.
+- **Actions**:
+  - Provide simplified endpoints for mobile app integration.

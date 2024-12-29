@@ -1,17 +1,24 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SignupPage from "./pages/signupPages";
-import SigninPage from "./pages/SigninPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SignInPage from "./pages/SigninPage";
+import SignUpPage from "./pages/signupPages";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import RootPage from "./pages/RootPage";
-function App() {
+
+const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<RootPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/signin" element={<SigninPage />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<RootPage />} />
+          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+        </Routes>
+      </Router>
+    </div>
   );
-}
+};
 
 export default App;

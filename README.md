@@ -1,21 +1,54 @@
-Features Overview User Management
+# Features for Freelancer Invoice
 
-Admin Dashboard Role-based Access Control (Admin, Manager, Staff) Client/Customer Portal Invoice Management
+## 1. Basic Details
+- **Invoice Number**: A unique identifier for tracking.
+- **Date of Issue**: The date the invoice is created.
+- **Due Date**: The deadline for payment.
+- **Freelancer Details**:  
+  - Name  
+  - Address  
+  - Email  
+  - Phone  
+  - Tax information (if applicable)
+- **Client Details**:  
+  - Name  
+  - Company Name  
+  - Address  
+  - Contact information  
 
-Create, Edit, and Delete Invoices Automated Invoice Numbering Tax and Discount Calculations Multi-currency Support Attachments to Invoices (if needed) PDF Generation
+## 2. Project and Payment Details
+- **Description of Services**: Clear breakdown of tasks or projects completed.
+- **Itemized List**: Include:  
+  - Quantities  
+  - Rates  
+  - Subtotals for each service  
+- **Payment Amount**: Total amount due, including currency.
+- **Taxes**: Clearly indicate the tax breakdown (if applicable).
+- **Discounts**: Any applicable discounts.
 
-Generate Invoices in PDF Format Customizable Invoice Templates Branding (Logo, Header, Footer) Email Integration
+## 3. Payment Information
+- **Payment Methods**:  
+  - Bank details  
+  - PayPal, Stripe, or other payment platforms
+- **Currency**: Specify the currency for international clients.
+- **Late Fees**: Mention penalties for overdue payments (if applicable).
 
-Send Invoices via Email Predefined and Customizable Email Templates Notifications (Payment Reminders, Due Dates) Payment Options
+## 4. Professionalism
+- **Logo and Branding**: Add your logo and branding for a professional touch.
+- **Notes Section**: Include a thank-you note or specific payment instructions.
 
-Online Payment Gateway Integration (PayPal, Stripe, Razorpay, etc.) Bank Transfer and Manual Payment Recording Payment Status (Paid, Unpaid, Partially Paid) Analytics and Reporting
+## 5. Automation and Record-Keeping
+- **Recurring Invoices**: Automate for ongoing projects.
+- **Status Tracking**: Indicate if an invoice is paid, unpaid, or overdue.
+- **Editable Templates**: Customizable for different clients or services.
+- **Export Options**: Save or export invoices as PDFs or send directly via email.
 
-Payment Reports Outstanding Invoices Tax Reports Downloadable Reports in PDF/Excel Security
+## 6. Legal and Compliance
+- **Tax Compliance**: Include VAT, GST, or other tax IDs as required by local laws.
+- **Contract Reference**: Optionally reference any contract or agreement tied to the invoice.
 
-SSL Encryption Data Validation and Sanitization Secure Authentication (2FA, OAuth) Localization
-
-Multi-language Support Date/Time and Currency Formatting Notifications
-
-Email and SMS Notifications Reminders for Overdue Invoices Integration
-
-API for External System Integration Sync with Accounting Tools (e.g., QuickBooks, Xero)
+## 7. Additional Features
+- **Multi-Currency Support**: For international clients.
+- **Multi-Language Support**: Useful for clients from different regions.
+- **Mobile Access**: Create and send invoices on the go.
+- **Time Tracking Integration**: Sync with tools like Toggl or Harvest for accurate billing.
