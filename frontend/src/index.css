@@ -1,3 +1,74 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Light Theme */
+:root {
+  --color-primary: #000000; /* Black for primary */
+  --color-secondary: #ffffff; /* White for secondary accents */
+  --color-bg-light: #ffffff; /* White background for light theme */
+  --color-text-light: #000000; /* Black text for light theme */
+  --color-btn-primary-light: #000000; /* Black button for light theme */
+  --color-btn-primary-text-light: #ffffff; /* White text on black button */
+  --color-btn-hover-light: #333333; /* Darker black on hover */
+  --color-link-light: #000000; /* Black links for light mode */
+  --color-link-hover-light: #666666; /* Lighter black for links on hover */
+}
+
+/* Dark Theme */
+.dark {
+  --color-bg-dark: #1a1a1a; /* Dark background for dark theme */
+  --color-text-dark: #ffffff; /* White text for dark theme */
+  --color-btn-primary-dark: #ffffff; /* White button for dark theme */
+  --color-btn-primary-text-dark: #000000; /* Black text on white button */
+  --color-btn-hover-dark: #cccccc; /* Lighter white for hover on dark mode */
+  --color-link-dark: #ffffff; /* White links for dark theme */
+  --color-link-hover-dark: #cccccc; /* Lighter white for links on hover */
+}
+
+/* Apply Light/Dark Theme Variables */
+body {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-light);
+}
+
+a {
+  color: var(--color-link-light);
+}
+
+a:hover {
+  color: var(--color-link-hover-light);
+}
+
+button, .btn-primary {
+  background-color: var(--color-btn-primary-light);
+  color: var(--color-btn-primary-text-light);
+  transition: background-color 0.3s ease;
+}
+
+button:hover, .btn-primary:hover {
+  background-color: var(--color-btn-hover-light);
+}
+
+/* For dark mode */
+body.dark {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
+}
+
+body.dark a {
+  color: var(--color-link-dark);
+}
+
+body.dark a:hover {
+  color: var(--color-link-hover-dark);
+}
+
+body.dark button, .btn-primary {
+  background-color: var(--color-btn-primary-dark);
+  color: var(--color-btn-primary-text-dark);
+}
+
+body.dark button:hover, .btn-primary:hover {
+  background-color: var(--color-btn-hover-dark);
+}
