@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import Button from "../components/ui/Button";
 
-const SignInPage = () => {
+export default function SignInPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-bg-light dark:bg-bg-dark">
       <div className="w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-text-light dark:text-text-dark">
-          Login
+        Sign-In
         </h2>
         <form className="mt-4">
           <div className="mb-4">
@@ -42,6 +43,12 @@ const SignInPage = () => {
           >
             Login
           </button>
+          <Button
+            type="submit"
+            className="w-full px-4 py-2 text-btn-primary-text-light dark:text-btn-primary-text-dark bg-btn-primary-light dark:bg-btn-primary-dark rounded-md hover:bg-btn-hover-light dark:hover:bg-btn-hover-dark"
+          >
+             Sign-In
+          </Button>
           <p className="mt-4 text-sm text-center text-link-light dark:text-link-dark hover:text-link-hover-light dark:hover:text-link-hover-dark">
             Forgot your password?{" "}
             <Link
@@ -57,4 +64,3 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;

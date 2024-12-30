@@ -1,7 +1,6 @@
 import { Router } from "express";
 import {
   deleteUser,
-  getAdminOverview,
   getAllUsers,
   getUser,
 } from "../controllers/admin.controller.js";

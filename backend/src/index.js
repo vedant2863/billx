@@ -2,8 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./database/db.js";
-import indexRouter from "./routes/index.routes.js";
 import cookieParser from "cookie-parser";
+import rateLimit from "express-rate-limit";
+import cors from "cors";
+import indexRouter from "./routes/index.routes.js";
 
 //Load env variables
 dotenv.config();
@@ -19,12 +21,38 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+// Global rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: "Too many requests from this IP, please try again later.",
+})
+
 // Body Parser Middleware
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 app.use(
   cookieParser()
 )
+app.use("/api", limiter); // Apply rate limiting to all routes
+
+// CORS Configuration
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "device-remember-token",
+      "Access-Control-Allow-Origin",
+      "Origin",
+      "Accept",
+    ],
+  })
+);
 
 //routes
 app.use("/api", indexRouter);

@@ -7,19 +7,14 @@ import {
   userLogin,
   userRegister,
 } from "../controllers/user.controller.js";
-import {
-    validatePasswordChange,
-  validateSignin,
-  validateSignup,
-} from "../middleware/validation.middleware.js";
 import { isAuthenticated } from "../middleware/auth.middleware.js";
 const userRouter = Router();
 
 // POST /api/v1/users/register: Register a new user.
-userRouter.post("/register",validateSignup ,userRegister);
+userRouter.post("/register" ,userRegister);
 
 // POST /api/v1/users/login: Authenticate and login.
-userRouter.post("/login", validateSignin, userLogin);
+userRouter.post("/login", userLogin);
 
 // POST /api/v1/users/logout: Logout the current user.
 userRouter.post("/logout", logOut);

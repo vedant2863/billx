@@ -10,7 +10,7 @@
   --color-text-light: #000000; /* Black text for light theme */
   --color-btn-primary-light: #000000; /* Black button for light theme */
   --color-btn-primary-text-light: #ffffff; /* White text on black button */
-  --color-btn-hover-light: #333333; /* Darker black on hover */
+  --color-btn-hover-light: #332d2d; /* Darker black on hover */
   --color-link-light: #000000; /* Black links for light mode */
   --color-link-hover-light: #666666; /* Lighter black for links on hover */
 }

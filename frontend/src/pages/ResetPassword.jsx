@@ -1,5 +1,5 @@
 
-const ResetPassword = () => {
+export default function ResetPassword() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-bg-light dark:bg-bg-dark">
       <div className="w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md">
@@ -41,4 +41,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+

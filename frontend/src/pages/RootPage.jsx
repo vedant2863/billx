@@ -6,20 +6,12 @@ import Footer from "../components/Footer";
 
 export default function RootPage() {
   return (
-    <div className="min-h-screen bg-bg-light text-text-light">
-      {/* Navbar */}
+    <>
       <Navbar />
-
       <HeroSection/>
-
-      {/* Features Overview Section */}
       <FeaturesOverview />
-
-      {/* Call to Action */}
       <CallToAction />
-
-      {/* Footer */}
       <Footer/>
-    </div>
+    </>
   );
 }
